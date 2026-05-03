@@ -3,7 +3,17 @@
 ## ✨ About
 
 Welcome to **The Secret Train to Dreamland** — a fantasy storytelling app built with **Streamlit**.  
-This experience combines long-form story reading, AI character chat, account-based features, and immersive visual design.
+The app combines long-form reading, AI character chat, account-based features, and immersive visual design.
+
+## 🆕 Recent Updates
+
+- 🏠 **Home tab improved** with a stronger hero section, quick metrics, and “Start Here” guidance
+- 🔐 **Login/Register/Profile/Settings/Logout** UX refined with clearer tips and status messaging
+- 👤 **Profile** now shows snapshot metrics (saved messages and profile image status)
+- ⚙️ **Settings** improved with better preference and maintenance guidance
+- 📘 **Story (Pages 1–25)** now includes long-read mode + reading progress bar
+- 🧚 **AI Fairy Chatbot** improved with clearer behavior notes and conversation turn count
+- ℹ️ **About** expanded with platform/system highlights
 
 ## 🌌 App Overview
 
