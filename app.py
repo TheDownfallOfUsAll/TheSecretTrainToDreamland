@@ -307,6 +307,26 @@ st.markdown(
         margin-top: 2px;
     }
 
+    .home-hero {
+        background: linear-gradient(135deg, rgba(73, 48, 150, 0.65), rgba(26, 98, 186, 0.55));
+        border: 1px solid rgba(212, 192, 255, 0.6);
+        border-radius: 24px;
+        padding: 26px;
+        box-shadow: 0 0 24px rgba(114, 86, 255, 0.45);
+        margin-bottom: 16px;
+    }
+
+    .home-pill {
+        display: inline-block;
+        margin: 6px 8px 0 0;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(220, 203, 255, 0.7);
+        background: rgba(255, 255, 255, 0.1);
+        color: #f5ecff;
+        font-size: 0.92rem;
+    }
+
     .chat-user-box {
         background: linear-gradient(90deg, rgba(54, 72, 150, 0.9), rgba(83, 126, 255, 0.9));
         border: 1px solid rgba(160, 200, 255, 0.8);
@@ -523,20 +543,55 @@ if menu == "Home":
 
     st.markdown(
         """
-        <div class="story-card">
-        <h2>✨ Welcome to Dreamland ✨</h2>
-        <p>
-        Enter a magical world of dreams, stars, glowing trains, and unforgettable adventures.
-        Follow Avril and her friends as they battle shadows and discover courage.
-        </p>
+        <div class="home-hero">
+            <h2>✨ Welcome to Dreamland ✨</h2>
+            <p>
+            Step into a magical world of stars, glowing rails, and brave choices.
+            Follow Avril and her companions through 25 long-read chapters filled with wonder,
+            fear, memory, and courage.
+            </p>
+            <span class="home-pill">📖 25 Story Pages</span>
+            <span class="home-pill">🧚 AC & Nikolai Chat</span>
+            <span class="home-pill">🔐 Login + Profile</span>
+            <span class="home-pill">💾 SQLite Saved History</span>
         </div>
         """,
         unsafe_allow_html=True
     )
 
+    col_a, col_b, col_c = st.columns(3)
+    with col_a:
+        st.metric("Story Chapters", "25")
+    with col_b:
+        st.metric("AI Guides", "2", "AC • Nikolai")
+    with col_c:
+        st.metric("Chat Storage", "Per User", "SQLite")
+
+    st.markdown(
+        """
+        <div class="story-card">
+            <h3>🌌 Start Here</h3>
+            <p>
+            New reader: open <b>Table of Story Contents</b> then continue with <b>Story (Pages 1-25)</b>.<br>
+            Returning reader: log in to continue your saved AI Fairy conversations and profile settings.<br>
+            Want guidance now: open <b>AI Fairy Chatbot</b> and ask AC or Nikolai anything.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.image(
+        asset_path("thesecrettraintodreamlandbook.jpg"),
+        caption="The book that inspired the magical journey into Dreamland.",
+        width="stretch",
+    )
+
 elif menu == "Login":
     st.title("🔐 Login")
     st.markdown('<div class="story-card">Sign in to unlock saved Fairy chat history.</div>', unsafe_allow_html=True)
+    if st.session_state.user:
+        st.success(f"You are currently logged in as {st.session_state.user['username']}.")
 
     with st.form("login_form", clear_on_submit=False):
         username = st.text_input("Username")
@@ -559,6 +614,7 @@ elif menu == "Login":
 elif menu == "Register":
     st.title("📝 Register")
     st.markdown('<div class="story-card">Create an account for persistent Dreamland AI chat.</div>', unsafe_allow_html=True)
+    st.caption("Tip: use a memorable username and a password with at least 6 characters.")
 
     with st.form("register_form", clear_on_submit=True):
         new_username = st.text_input("Choose username")
@@ -606,6 +662,12 @@ elif menu == "Profile":
 
     st.markdown("#### Bio")
     st.write(st.session_state.user.get("bio") or "No bio yet.")
+    st.markdown("#### Account Snapshot")
+    col_p1, col_p2 = st.columns(2)
+    with col_p1:
+        st.metric("Saved Messages", len(load_chat_history(st.session_state.user["id"])))
+    with col_p2:
+        st.metric("Profile Image", "Set" if profile_image else "Not Set")
     st.markdown("#### Edit Profile")
 
     local_images = [f for f in os.listdir(BASE_DIR) if f.lower().endswith((".jpg", ".jpeg", ".png"))]
@@ -663,6 +725,9 @@ elif menu == "Settings":
         st.session_state.chat_start_preference = "Alternating"
         st.success("Chat preferences reset to default.")
 
+    st.markdown("#### Account Maintenance")
+    st.caption("Use logout to switch account quickly and safely from the sidebar navigation.")
+
 elif menu == "Logout":
     st.title("🚪 Logout")
     if st.session_state.user:
@@ -671,6 +736,7 @@ elif menu == "Logout":
         st.session_state.messages = []
         st.session_state.next_speaker = "AC"
         st.success(f"{username} has been logged out.")
+        st.info("You can log in again anytime from the Login tab.")
     else:
         st.info("No user is currently logged in.")
 
@@ -680,6 +746,7 @@ elif menu == "Logout":
 
 elif menu == "Characters List":
     st.title("🌟 Characters List")
+    st.caption("Meet the heroes, family, and shadows shaping Avril's Dreamland journey.")
 
     st.markdown(
         """
@@ -708,12 +775,31 @@ elif menu == "Characters List":
         unsafe_allow_html=True
     )
 
+    st.markdown("### Character Portraits")
+    st.image(asset_path("avril_angeles.jpg"), caption="Avril — A shy girl chosen by the magical train.", width="stretch")
+    st.image(
+        asset_path("angelgirl-philosophygirl-crystalboy.jpg"),
+        caption="Angel Girl, Philosophy Girl, and Crystal Boy, united to protect Dreamland.",
+        width="stretch",
+    )
+    col_family1, col_family2 = st.columns(2)
+    with col_family1:
+        st.image(asset_path("ulysses-helen.jpg"), caption="Ulysses and Helen — Avril's parents.", width="stretch")
+    with col_family2:
+        st.image(asset_path("wendell-jerry-yeng.jpg"), caption="Wendell, Jerry, and Yeng — Avril's siblings.", width="stretch")
+    st.image(
+        asset_path("darkwizard-darkforest-ghostshadow.jpg"),
+        caption="Dark Wizard, Dark Forest, and Ghost Shadow — the forces Avril must face.",
+        width="stretch",
+    )
+
 # ---------------------------------------------------
 # STORYTELLING
 # ---------------------------------------------------
 
 elif menu == "Storytelling":
     st.title("📖 Storytelling")
+    st.caption("A cinematic preview of the full Dreamland arc before you open the complete storybook.")
 
     st.markdown(
         """
@@ -727,23 +813,6 @@ elif menu == "Storytelling":
         """,
         unsafe_allow_html=True
     )
-    st.image(asset_path("avril_angeles.jpg"), caption="Avril — A shy girl chosen by the magical train.", width="stretch")
-    st.image(
-        asset_path("angelgirl-philosophygirl-crystalboy.jpg"),
-        caption="Angel Girl, Philosophy Girl, and Crystal Boy",
-        width="stretch",
-    )
-    col_family1, col_family2 = st.columns(2)
-    with col_family1:
-        st.image(asset_path("ulysses-helen.jpg"), caption="Ulysses and Helen", width="stretch")
-    with col_family2:
-        st.image(asset_path("wendell-jerry-yeng.jpg"), caption="Wendell, Jerry, and Yeng", width="stretch")
-    st.image(
-        asset_path("darkwizard-darkforest-ghostshadow.jpg"),
-        caption="Dark Wizard, Dark Forest, and Ghost Shadow",
-        width="stretch",
-    )
-    st.image(asset_path("thesecrettraintodreamlandbook.jpg"), caption="The Secret Train to Dreamland Book", width="stretch")
 
 # ---------------------------------------------------
 # TABLE OF CONTENTS
@@ -751,6 +820,7 @@ elif menu == "Storytelling":
 
 elif menu == "Table of Story Contents":
     st.title("📚 Table of Story Contents")
+    st.caption("Use this chapter guide, then switch to Story (Pages 1-25) and jump to any page.")
 
     contents = [
         "1. The Midnight Whistle",
@@ -794,6 +864,7 @@ elif menu == "Table of Story Contents":
             unsafe_allow_html=True,
         )
     st.markdown("</div>", unsafe_allow_html=True)
+    st.info("Navigation tip: open 'Story (Pages 1-25)' and use the slider to jump directly to a chapter page.")
 
 # ---------------------------------------------------
 # STORY PAGES FLIP BOOK STYLE
@@ -802,6 +873,7 @@ elif menu == "Table of Story Contents":
 elif menu == "Story (Pages 1-25)":
 
     st.title("📘 Dreamland Storybook")
+    st.caption("Long-read mode: each page is written as a full narrative paragraph for immersive reading.")
 
     pages = {
         1: "At exactly midnight, Avril woke to a whistle that sounded like silver wind through glass, soft at first and then clear enough to pull sleep from her eyes. She pushed open her window and saw rails of pale light suspended above the town, curving upward into the sky like a path written by stars. The quiet street below held only the distant hum of electricity and the hush of sleeping houses, yet the air around her window trembled as if waiting for an answer. She stood in her nightclothes, heart pounding, wondering whether the sight was a dream sent by an overfull imagination. When the whistle came again, lower and warmer, it felt as if the night itself had learned her name and was calling her to step beyond everything familiar.",
@@ -854,6 +926,7 @@ elif menu == "Story (Pages 1-25)":
     )
 
     current_page = st.session_state.page
+    st.progress(current_page / 25, text=f"Reading progress: Page {current_page} of 25")
 
     st.markdown(
         f"""
@@ -884,6 +957,7 @@ elif menu == "AI Fairy Chatbot":
         """,
         unsafe_allow_html=True
     )
+    st.caption("AC and Nikolai alternate by design. Response style and starting speaker can be customized in Settings.")
 
     banned_words = ["badword", "curse", "swear"]
 
@@ -947,6 +1021,7 @@ elif menu == "AI Fairy Chatbot":
             f'<div class="chat-fairy-box"><b>🧚 {speaker}:</b> {res}</div>',
             unsafe_allow_html=True,
         )
+    st.caption(f"Conversation turns saved: {len(st.session_state.messages)}")
 
 # ---------------------------------------------------
 # ABOUT
@@ -985,6 +1060,18 @@ elif menu == "About":
         Built with imagination for readers who love stars, mystery, and magical journeys. Owned and guided by AC and Nikolai, this app blends storybook wonder with gentle, real-world support.
         </p>
 
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        """
+        <div class="story-card">
+        <h3>🛠 Platform Highlights</h3>
+        <p>
+        This app includes authentication, profile management, SQLite persistence,
+        long-form story navigation, and OpenAI-powered fairy chat with local fallback.
+        </p>
         </div>
         """,
         unsafe_allow_html=True
