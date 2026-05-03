@@ -5,7 +5,10 @@ import sqlite3
 import hashlib
 import os
 from datetime import datetime, UTC
-from openai import OpenAI
+try:
+    from openai import OpenAI
+except ModuleNotFoundError:
+    OpenAI = None
 
 st.set_page_config(
     page_title="The Secret Train to Dreamland",
@@ -444,6 +447,9 @@ def fairy_reply(speaker: str, text: str, style_mode: str = "Balanced") -> str:
 
 
 def openai_fairy_reply(speaker: str, user_text: str, history, style_mode: str = "Balanced"):
+    if OpenAI is None:
+        return None
+
     api_key = os.getenv("OPENAI_API_KEY", "")
     if not api_key:
         return None
