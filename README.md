@@ -7,14 +7,15 @@ The app combines long-form reading, AI character chat, account-based features, a
 
 ## 🆕 Recent Updates
 
-- 🏠 **Home tab improved** with a stronger hero section, quick metrics, and “Start Here” guidance
-- 🔐 **Login/Register/Profile/Settings/Logout** UX refined with clearer tips and status messaging
-- 👤 **Profile** now shows snapshot metrics (saved messages and profile image status)
-- ⚙️ **Settings** improved with better preference and maintenance guidance
-- 📘 **Story (Pages 1–25)** now includes long-read mode + reading progress bar
+- 🏠 **Home tab improved** with stronger hero visuals, quick metrics, and Start Here guidance
+- 🔐 **Login / Register / Profile / Settings / Logout** UX refined with clearer prompts and status messages
+- 👤 **Profile tab** now includes snapshot metrics (saved messages and profile image status)
+- ⚙️ **Settings tab** improved with preference summary and account maintenance guidance
+- 📘 **Story (Pages 1–25)** upgraded with long-read paragraphs and reading progress
 - 🧚 **AI Fairy Chatbot** improved with clearer behavior notes and conversation turn count
-- ℹ️ **About** expanded with platform/system highlights
-- 🛡️ **Startup reliability improved**: app no longer crashes if `openai` package is missing; it auto-falls back to local persona replies
+- ℹ️ **About tab** expanded with platform highlights
+- 🛡️ **Startup reliability improved**: app no longer crashes when `openai` package is missing
+- 🌐 **Live deployment published** on Streamlit Community Cloud
 
 ## 🌌 App Overview
 
@@ -58,9 +59,9 @@ The app combines long-form reading, AI character chat, account-based features, a
   - Per-user chat history storage and reload
   - User-level chat clear controls
 - ✅ **External AI Service Integration**
-- OpenAI API integration for real responses
-- Fallback persona responses when API key is unavailable
-- Safe optional OpenAI import handling to prevent startup failure when package is not installed
+  - OpenAI API integration for live responses
+  - Local fallback persona responses when API key is unavailable
+  - Safe optional OpenAI import handling if package is not installed
 - ✅ **Input Safety Controls**
   - Blocked-word filtering for chatbot input
 - ✅ **Modular Sectioned App Architecture**
@@ -128,7 +129,7 @@ streamlit run app.py
 - `dreamland.db` is created automatically on first run
 - Register and login to unlock persistent AI chat history
 - If no OpenAI key is set, chatbot still works via local persona fallback
-- If `openai` package is not installed, app still runs and chatbot uses local persona fallback
+- If `openai` package is not installed, app still runs using fallback mode
 
 ## ⚙️ Tech Stack
 
@@ -139,19 +140,20 @@ streamlit run app.py
 
 ## 📝 Notes
 
-- 📁 Keep image files in the project root for reliable rendering.
-- 💬 AI chat history is stored per logged-in account.
-- 🔄 Restart Streamlit after major file/style updates if UI seems stale.
-- 🛡️ Built-in filtered word checks are enabled in chatbot flow.
-- 🧩 OpenAI dependency is optional at runtime; install `openai` for live AI responses.
+- 📁 Keep image files in the project root for reliable rendering
+- 💬 AI chat history is stored per logged-in account
+- 🔄 Restart Streamlit after major file/style updates if UI seems stale
+- 🛡️ Built-in filtered word checks are enabled in chatbot flow
+- 🧩 OpenAI dependency is optional at runtime; install `openai` for live AI responses
 
 ## 🚧 Deployment
 
-The app is now live and publicly deployed on Streamlit Community Cloud.
+The app is now live on Streamlit Community Cloud.
 
 - 🌐 **Live App:** https://thebookoftraintodreamland.streamlit.app/
 - 🚀 Deployment platform: Streamlit Community Cloud
-- 🛠️ Ongoing improvements and feature polishing continue in active development
-- 🔄 Updates are released iteratively to improve UX, story quality, and system stability
+- 🛠️ Active development is continuing with iterative improvements
+- 🔄 Ongoing releases focus on UX, story quality, and system stability
 
 > ✅ **Live now — board the Dreamland journey here:** https://thebookoftraintodreamland.streamlit.app/ ✨
+
