@@ -14,6 +14,7 @@ The app combines long-form reading, AI character chat, account-based features, a
 - 📘 **Story (Pages 1–25)** now includes long-read mode + reading progress bar
 - 🧚 **AI Fairy Chatbot** improved with clearer behavior notes and conversation turn count
 - ℹ️ **About** expanded with platform/system highlights
+- 🛡️ **Startup reliability improved**: app no longer crashes if `openai` package is missing; it auto-falls back to local persona replies
 
 ## 🌌 App Overview
 
@@ -57,8 +58,9 @@ The app combines long-form reading, AI character chat, account-based features, a
   - Per-user chat history storage and reload
   - User-level chat clear controls
 - ✅ **External AI Service Integration**
-  - OpenAI API integration for real responses
-  - Fallback persona responses when API key is unavailable
+- OpenAI API integration for real responses
+- Fallback persona responses when API key is unavailable
+- Safe optional OpenAI import handling to prevent startup failure when package is not installed
 - ✅ **Input Safety Controls**
   - Blocked-word filtering for chatbot input
 - ✅ **Modular Sectioned App Architecture**
@@ -126,6 +128,7 @@ streamlit run app.py
 - `dreamland.db` is created automatically on first run
 - Register and login to unlock persistent AI chat history
 - If no OpenAI key is set, chatbot still works via local persona fallback
+- If `openai` package is not installed, app still runs and chatbot uses local persona fallback
 
 ## ⚙️ Tech Stack
 
@@ -140,14 +143,15 @@ streamlit run app.py
 - 💬 AI chat history is stored per logged-in account.
 - 🔄 Restart Streamlit after major file/style updates if UI seems stale.
 - 🛡️ Built-in filtered word checks are enabled in chatbot flow.
+- 🧩 OpenAI dependency is optional at runtime; install `openai` for live AI responses.
 
 ## 🚧 Deployment
 
-This app is still **under development** and active improvements are in progress.
+The app is now live and publicly deployed on Streamlit Community Cloud.
 
-- 🚧 Production hardening and final QA are ongoing
-- 🏗️ Deployment pipeline and hosting setup are being prepared
-- 🔗 Public link will be dropped soon
+- 🌐 **Live App:** https://thebookoftraintodreamland.streamlit.app/
+- 🚀 Deployment platform: Streamlit Community Cloud
+- 🛠️ Ongoing improvements and feature polishing continue in active development
+- 🔄 Updates are released iteratively to improve UX, story quality, and system stability
 
-> 🚧 **Live app link coming soon... stay tuned!** ✨
-
+> ✅ **Live now — board the Dreamland journey here:** https://thebookoftraintodreamland.streamlit.app/ ✨
