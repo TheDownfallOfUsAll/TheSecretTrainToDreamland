@@ -1,144 +1,143 @@
-# The Secret Train to Dreamland
+# 🚂 The Secret Train to Dreamland
 
-## About
+## ✨ About
 
-The Secret Train to Dreamland is a Streamlit fantasy storytelling application that combines:
+Welcome to **The Secret Train to Dreamland** — a fantasy storytelling app built with **Streamlit**.  
+This experience combines long-form story reading, AI character chat, account-based features, and immersive visual design.
 
-- a long-form 25-page storybook experience
-- account-based access and profile management
-- AI chat personas (AC and Nikolai)
-- local persistence with SQLite
-- themed UI with story navigation and character visuals
+## 🌌 App Overview
 
-Recent updates include expanded long-read story content, richer navigation sections, profile and settings pages, image-backed character sections, and OpenAI-powered chatbot responses with fallback behavior.
+- 📖 Long-read **Storybook (Pages 1–25)** with expanded chapter narrative
+- 🧚 AI Fairy Chatbot with alternating guides: **AC** and **Nikolai**
+- 🔐 Authentication flow: Login, Register, Profile, Settings, Logout
+- 💾 SQLite persistence for users and per-account chat history
+- 🧠 OpenAI-powered chat responses with graceful local fallback
+- 🎨 Fantasy interface with character imagery and themed navigation
 
-## Current App Sections
+## 🧭 Current App Sections
 
-- Home
-- Login
-- Register
-- Profile
-- Settings
-- Logout
-- Characters List
-- Storytelling
-- Table of Story Contents
-- Story (Pages 1-25)
-- AI Fairy Chatbot
-- About
+- 🏠 Home
+- 🔐 Login
+- 📝 Register
+- 👤 Profile
+- ⚙️ Settings
+- 🚪 Logout
+- 🌟 Characters List
+- 📚 Storytelling
+- 📑 Table of Story Contents
+- 📘 Story (Pages 1-25)
+- 🧚 AI Fairy Chatbot
+- ℹ️ About
 
-## Enterprise System Features Used In This App
+## 🏢 Enterprise System Features Used In This App
 
-- Authentication and account lifecycle:
-  - user registration, login, and logout flow
-  - credential hashing with `sha256`
-- Role-like gated access:
-  - AI chat usage is gated behind login
-- Persistent data layer:
+- ✅ **Authentication & Account Lifecycle**
+  - Register, login, and logout flow
+  - Credential hashing with `sha256`
+- ✅ **Access Control**
+  - AI Fairy Chatbot usage is gated behind login
+- ✅ **Persistent Data Layer**
   - SQLite database (`dreamland.db`)
-  - schema initialization and migration-safe column backfill
-- User profile management:
-  - editable full name, bio, and profile image selection
-- Stateful session management:
-  - Streamlit `session_state` for user identity, chat flow, and page state
-- Audit-like conversational persistence:
-  - per-user chat history storage and reload
-  - user-level chat history clearing controls
-- External AI service integration:
-  - OpenAI API integration for live responses
-  - safe local fallback when API key is missing/unavailable
-- Input policy controls:
-  - blocked-word filter for chatbot inputs
-- Modular app structure:
-  - clear section-based navigation and isolated logic blocks
+  - Schema initialization and migration-safe column backfill
+- ✅ **User Profile Management**
+  - Editable full name, bio, and profile image
+- ✅ **Stateful Session Management**
+  - `st.session_state` for user identity, chat speaker flow, and page state
+- ✅ **Conversation Persistence**
+  - Per-user chat history storage and reload
+  - User-level chat clear controls
+- ✅ **External AI Service Integration**
+  - OpenAI API integration for real responses
+  - Fallback persona responses when API key is unavailable
+- ✅ **Input Safety Controls**
+  - Blocked-word filtering for chatbot input
+- ✅ **Modular Sectioned App Architecture**
+  - Isolated page sections and maintainable structure
 
-## Installation and Setup
+## 🛠️ Installation & Setup
 
-### 1. Prerequisites
+### 1. ✅ Prerequisites
 
 - Python 3.11+ recommended
-- Windows PowerShell (examples below use PowerShell)
+- Windows PowerShell (commands below use PowerShell syntax)
 
-### 2. Clone or Download Project
+### 2. 📦 Get the Project
 
-If using git:
+If using Git:
 
 ```bash
 git clone <your-repo-url>
 cd TheSecretTrainToDreamland
 ```
 
-Or download and extract the project ZIP, then open a terminal in the project folder.
+Or download the ZIP and open a terminal in the extracted folder.
 
-### 3. Create Virtual Environment
+### 3. 🧪 Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-### 4. Activate Virtual Environment
-
-PowerShell:
+### 4. ▶️ Activate Virtual Environment
 
 ```bash
 .\.venv\Scripts\activate
 ```
 
-### 5. Install Dependencies
+### 5. 📥 Install Dependencies
 
 ```bash
 pip install --upgrade pip
 pip install streamlit openai
 ```
 
-### 6. Configure Environment Variable (OpenAI)
+### 6. 🔑 Configure OpenAI API Key
 
-PowerShell (current terminal session):
+Current terminal session:
 
 ```bash
 $env:OPENAI_API_KEY="your_api_key_here"
 ```
 
-Optional persistent setup (new terminals):
+Persistent for future terminals:
 
 ```bash
 setx OPENAI_API_KEY "your_api_key_here"
 ```
 
-### 7. Run the App
+### 7. 🚀 Run the App
 
 ```bash
 streamlit run app.py
 ```
 
-### 8. First Run Notes
+### 8. 🧾 First-Run Behavior
 
-- SQLite file `dreamland.db` is auto-created on first run.
-- Register a new account, then login to use persisted AI Fairy chat history.
-- If OpenAI key is missing, chatbot continues with local persona fallback replies.
+- `dreamland.db` is created automatically on first run
+- Register and login to unlock persistent AI chat history
+- If no OpenAI key is set, chatbot still works via local persona fallback
 
-## Database Summary
+## ⚙️ Tech Stack
 
-- Database file: `dreamland.db`
-- Tables:
-  - `users`
-  - `chat_history`
+- 🐍 Python
+- 🎈 Streamlit
+- 🗄️ SQLite
+- 🤖 OpenAI API
 
-## Troubleshooting
+## 📝 Notes
 
-- If images do not show:
-  - confirm image files exist in the project root
-  - restart Streamlit after file changes
-- If OpenAI chat is not responding with live AI:
-  - verify `OPENAI_API_KEY` is set in the same terminal session
-- If dependencies fail:
-  - confirm venv is activated
-  - upgrade pip and reinstall requirements
+- 📁 Keep image files in the project root for reliable rendering.
+- 💬 AI chat history is stored per logged-in account.
+- 🔄 Restart Streamlit after major file/style updates if UI seems stale.
+- 🛡️ Built-in filtered word checks are enabled in chatbot flow.
 
-## Tech Stack
+## 🚧 Deployment
 
-- Python
-- Streamlit
-- SQLite
-- OpenAI API
+This app is still **under development** and active improvements are in progress.
+
+- 🚧 Production hardening and final QA are ongoing
+- 🏗️ Deployment pipeline and hosting setup are being prepared
+- 🔗 Public link will be dropped soon
+
+> 🚧 **Live app link coming soon... stay tuned!** ✨
 
