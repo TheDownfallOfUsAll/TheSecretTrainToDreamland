@@ -55,16 +55,16 @@ AC offers action-focused guidance, while Nikolai shares calm, thoughtful wisdom.
 
 ### App sections
 
-- **Home:** Magical welcome page with Dreamland introduction
-- **Login / Register:** Create an account or sign in
-- **Profile:** Add name, bio, and profile picture
-- **Settings:** Choose chat style and starting speaker
-- **Characters List:** Discover the main heroes and villains
-- **Storytelling:** Explore a visual story preview
-- **Table of Story Contents:** View chapter titles and structure
-- **Story (Pages 1-25):** Read the full Dreamland story page by page
-- **AI Fairy Chatbot:** Chat with AC and Nikolai and save your conversations
-- **About:** Learn how the app works and meet the Dreamland guides
+- **Home:** A magical welcome page where Dreamland begins and the story’s tone is introduced.
+- **Login / Register:** Create an account or sign in to save chat history and personalize your Dreamland presence.
+- **Profile:** Add your full name, write a bio, and select a profile picture to make the adventure feel personal.
+- **Settings:** Choose the Fairy chat response style and pick whether AC or Nikolai starts new conversations.
+- **Characters List:** Discover the main heroes and villains, including Avril, Angel Girl, Crystal Boy, Philosophy Girl, Ulysses, Helen, Wendell, Jerry, Yeng, the Dark Wizard, the Dark Forest, and Ghost Shadow.
+- **Storytelling:** Explore a visual story preview that shows key Dreamland scenes and introduces the adventure.
+- **Table of Story Contents:** View chapter titles and the structure for the full Dreamland journey.
+- **Story (Pages 1-25):** Read the full Dreamland story page by page, following Avril through each vivid chapter.
+- **AI Fairy Chatbot:** Chat with AC and Nikolai, receive supportive guidance, and save your conversations for later.
+- **About:** Learn how the app works, meet the Dreamland guides, and discover the ownership lore behind the story.
 
 ## 📝 Notes
 
