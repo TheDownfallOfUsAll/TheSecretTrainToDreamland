@@ -12,7 +12,8 @@ The app combines long-form reading, AI character chat, account-based features, a
 - 👤 **Profile tab** now includes snapshot metrics (saved messages and profile image status)
 - ⚙️ **Settings tab** improved with preference summary and account maintenance guidance
 - 📘 **Story (Pages 1–25)** upgraded with long-read paragraphs and reading progress
-- 🧚 **AI Fairy Chatbot** improved with clearer behavior notes and conversation turn count
+- 🧚 **AI Fairy Chatbot** improved with ChatGPT-style chat bubbles, broader fallback responses, and better handling of random user input
+- 🚫 Inappropriate language now returns a safe reply: `Sorry i cannot respond your message`
 - ℹ️ **About tab** expanded with platform highlights
 - 🛡️ **Startup reliability improved**: app no longer crashes when `openai` package is missing
 - 🌐 **Live deployment published** on Streamlit Community Cloud
@@ -23,7 +24,7 @@ The app combines long-form reading, AI character chat, account-based features, a
 - 🧚 AI Fairy Chatbot with alternating guides: **AC** and **Nikolai**
 - 🔐 Authentication flow: Login, Register, Profile, Settings, Logout
 - 💾 SQLite persistence for users and per-account chat history
-- 🧠 OpenAI-powered chat responses with graceful local fallback
+- 🧠 OpenAI-powered chat responses with graceful local fallback and ChatGPT-style message styling
 - 🎨 Fantasy interface with character imagery and themed navigation
 
 ## 🧭 Current App Sections
@@ -143,7 +144,7 @@ streamlit run app.py
 - 📁 Keep image files in the project root for reliable rendering
 - 💬 AI chat history is stored per logged-in account
 - 🔄 Restart Streamlit after major file/style updates if UI seems stale
-- 🛡️ Built-in filtered word checks are enabled in chatbot flow
+- 🛡️ Built-in filtered word checks are enabled in chatbot flow; blocked content replies with `Sorry i cannot respond your message`
 - 🧩 OpenAI dependency is optional at runtime; install `openai` for live AI responses
 
 ## 🚧 Deployment
