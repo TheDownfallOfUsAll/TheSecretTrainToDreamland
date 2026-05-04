@@ -331,22 +331,54 @@ st.markdown(
     }
 
     .chat-user-box {
-        background: linear-gradient(90deg, rgba(54, 72, 150, 0.9), rgba(83, 126, 255, 0.9));
-        border: 1px solid rgba(160, 200, 255, 0.8);
-        border-radius: 14px;
-        padding: 12px 14px;
-        margin: 8px 0 4px 0;
-        box-shadow: 0 0 12px rgba(84, 137, 255, 0.45);
+        background: #0f172a;
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 24px;
+        padding: 16px 18px;
+        margin: 12px 0 10px 20%;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+        max-width: 78%;
+        color: #f8fafc;
+        text-align: right;
     }
 
     .chat-fairy-box {
-        background: linear-gradient(90deg, rgba(93, 45, 180, 0.9), rgba(62, 123, 240, 0.9));
-        border: 1px solid rgba(203, 170, 255, 0.85);
-        border-radius: 14px;
-        padding: 12px 14px;
-        margin: 4px 0 14px 0;
-        box-shadow: 0 0 14px rgba(145, 102, 255, 0.6);
+        background: #111827;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        border-radius: 24px;
+        padding: 16px 18px;
+        margin: 12px 20% 10px 0;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.20);
+        max-width: 78%;
+        color: #e2e8f0;
+        text-align: left;
     }
+
+    .chat-user-box b,
+    .chat-fairy-box b {
+        display: block;
+        margin-bottom: 8px;
+        color: #f1f5f9;
+    }
+
+    .chat-user-box::before,
+    .chat-fairy-box::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .chat-user-box::before {
+        background: #60a5fa;
+    }
+
+    .chat-fairy-box::before {
+        background: #a78bfa;
+    }
+
     .dreamland-footer {
         position: fixed;
         left: 0;
@@ -416,6 +448,20 @@ def fairy_reply(speaker: str, text: str, style_mode: str = "Balanced") -> str:
 
     if any(word in lower_text for word in ["train", "ticket", "journey", "path"]):
         return "Every journey needs a ticket: your ticket is intention. Decide why you travel."
+
+    if any(word in lower_text for word in ["random", "anything", "hello", "hi", "hey", "wow"]):
+        if real_style:
+            return random.choice([
+                "I am listening. Tell me more, and I will answer with care and a gentle next step.",
+                "Even when words feel random, your message matters. I am here to help you notice one thing that feels true.",
+                "I hear you. Share what you feel, and I will respond with something supportive and clear.",
+            ])
+        if balanced_style:
+            return random.choice([
+                "I hear you. Share more of what you feel, and I will answer with both warmth and a clear idea.",
+                "Every message matters here. I will respond with care, even if the words seem random.",
+                "Your words are welcome. I will help you find meaning and a kind next step in them.",
+            ])
 
     if real_style:
         return random.choice([
@@ -489,7 +535,9 @@ def openai_fairy_reply(speaker: str, user_text: str, history, style_mode: str = 
                     "role": "system",
                     "content": (
                         "You are in a fantasy app chat. Keep responses under 90 words, clean language, "
-                        "and stay supportive.\n"
+                        "and stay supportive. If the user asks something random, respond with gentle, imaginative guidance. "
+                        "Do not use inappropriate language."
+                        "\n"
                         + persona
                         + " "
                         + style_clarifier
@@ -965,7 +1013,19 @@ elif menu == "AI Fairy Chatbot":
     )
     st.caption("AC and Nikolai alternate by design. Response style and starting speaker can be customized in Settings.")
 
-    banned_words = ["badword", "curse", "swear"]
+    banned_words = [
+        "badword",
+        "curse",
+        "swear",
+        "damn",
+        "hell",
+        "shit",
+        "fuck",
+        "bitch",
+        "asshole",
+        "bastard",
+        "crap",
+    ]
 
     if not st.session_state.user:
         st.warning("Please log in first. AI Fairy chat history is saved per account.")
@@ -997,11 +1057,10 @@ elif menu == "AI Fairy Chatbot":
     if send_chat and user_input:
         normalized_input = user_input.lower()
         banned_pattern = r"\b(" + "|".join(map(re.escape, banned_words)) + r")\b"
+        speaker = st.session_state.next_speaker
         if re.search(banned_pattern, normalized_input):
-            speaker = st.session_state.next_speaker
-            response = "⚠️ Dreamland magic asks you to use respectful words."
+            response = "Sorry i cannot respond your message"
         else:
-            speaker = st.session_state.next_speaker
             response = openai_fairy_reply(
                 speaker,
                 user_input,
